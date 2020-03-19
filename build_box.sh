@@ -1,6 +1,6 @@
 #!/bin/bash
-#wget https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-i386.7z
-#7z x kali-linux-2020.1-vmware-i386.7z
+wget https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-i386.7z
+7z x kali-linux-2020.1-vmware-i386.7z
 qemu-img convert  Kali-Linux-2020.1-vmware-i386/Kali-Linux-2020.1-vmware-i386.vmdk -O qcow2 ./kali.qcow2
 virt-sysprep -a kali.qcow2
 virt-sparsify --inplace kali.qcow2
