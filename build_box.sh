@@ -1,6 +1,6 @@
 #!/bin/bash
-wget https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-i386.7z
-7z x kali-linux-2020.1-vmware-i386.7z
+#wget https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-i386.7z
+#7z x kali-linux-2020.1-vmware-i386.7z
 qemu-img convert  Kali-Linux-2020.1-vmware-i386/Kali-Linux-2020.1-vmware-i386.vmdk -O qcow2 ./kali.qcow2
 virt-sysprep -a kali.qcow2
 virt-sparsify --inplace kali.qcow2
@@ -8,12 +8,13 @@ ROOT_PASS=`head -n 20 /dev/urandom  | sha1sum | cut -f 1 -d ' '`
 echo root password will be: $ROOT_PASS
 virt-customize --smp 4 -a kali.qcow2 \
 --hostname covid \
---install nginx,qemu-guest-agent,php7.3-common,php7.3-cli,php7.3-fpm,nipper-ng \
+--install nginx,qemu-guest-agent,php7.3-common,php7.3-cli,php7.3-fpm,nipper-ng,libc6=2.29-10 \
 --root-password password:$ROOT_PASS \
 --run-command 'systemctl disable apache2' \
 --run-command 'systemctl enable ssh' \
 --run-command 'systemctl enable nginx' \
 --run-command 'systemctl enable php7.3-fpm' \
+--run-command 'dpkg-reconfigure openssh-server' \
 --run-command 'rm /etc/nginx/sites-enabled/default' \
 --run-command 'rm -rf /var/www/html ' \
 --copy-in html/:/var/www/ \
