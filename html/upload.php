@@ -10,7 +10,7 @@ if(isset($_FILES["file_upload"])) {
     $target_file = sprintf('%/uploads/%s', getcwd(), $report_name);
     move_uploaded_file($_FILES["file_upload"]["tmp_name"], $target_file);
 
-    $cmd = sprintf('sudo /usr/bin/nipper --input=%s --output=%s/reports/%s.html', $target_file, getcwd(), $report_name);
+    $cmd = sprintf('/usr/bin/nipper --input=%s --output=%s/reports/%s.html', $target_file, getcwd(), $report_name);
     
     $output = '';
     $ret_val = -1;
