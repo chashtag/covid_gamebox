@@ -6,6 +6,9 @@
     <p class="lead">
     Welcome to the Cisco Online Vulnerability Inspector Device.
     </p>
+    <?php if(isset($_GET["error"])) : ?>
+    <p><strong style="color: red;">Not a vaild config!</strong></p>
+    <?php endif; ?>
     <br/><br/><br/><br/>
     <p>
     Upload a Cisco IOS config to get started. <br/>

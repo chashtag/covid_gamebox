@@ -19,9 +19,10 @@ virt-customize --smp 4 -a kali.qcow2 \
 --run-command 'DEBIAN_FRONTEND=noninteractive dpkg-reconfigure openssh-server' \
 --run-command 'rm -rf /var/www/html ' \
 --copy-in html/:/var/www/ \
---run-command 'chown -R www-data /var/www/html' \
+--run-command 'chown -R root:root /var/www/html' \
+--run-command 'chmod a+w /var/www/html/uploads' \
+--run-command 'chmod a+w /var/www/html/reports' \
 --run-command 'systemctl set-default multi-user.target' \
---run-command 'echo "www-data ALL=(root) NOPASSWD:/usr/bin/nipper" >> /etc/sudoers' \
 --copy-in covid_web_conf/nginx.conf:/etc/nginx/ \
 --copy-in covid_web_conf/covid:/etc/nginx/sites-enabled/ \
 --copy-in covid_web_conf/php.ini:/etc/php/7.4/fpm/ \
